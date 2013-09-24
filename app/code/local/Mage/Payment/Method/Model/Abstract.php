@@ -654,48 +654,9 @@ abstract class Mage_Payment_Model_Method_Abstract extends Varien_Object
             }
         }
 
-        // Check if the payment method is available and if the customer
-        // is logged in
-        if($checkResult->isAvailable && Mage::getSingleton('customer/session')->isLoggedIn()) {
-            // Check if the currently processing payment method is set to be
-            // blocked at a certain total customer due
-            $blockedPaymentMethods = explode(',', Mage::getStoreConfig('maximumcustomerdue/settings/blocked_payment_methods'));
-            $currentPaymentMethod = $this->_code;
-
-            // Only continue the check if the current payment method is indeed
-            // blocked
-            if(in_array($currentPaymentMethod, $blockedPaymentMethods)) {
-                // Get a reference to the customer
-                $customer = Mage::getSingleton('customer/session')->getCustomer();
-
-                // Get all of the customer's orders
-                $orders =   Mage::getModel('sales/order')
-                            ->getCollection()
-                            ->addFieldToFilter('customer_id', $customer->getId())
-                            ->addAttributeToSelect('base_grand_total')
-                            ->addAttributeToSelect('base_total_paid');
-
-                // Loop through all the orders and add up the total due of
-                // all the orders
-                $orders = $orders->toArray();
-                $totalDue = 0;
-                foreach($orders['items'] AS $order) {
-                    $orderDue = $order['base_grand_total']-$order['base_total_paid'];
-                    $totalDue += $orderDue;
-                }
-
-                // Check if the total due is greater than what the admin set as
-                // the maximum total due per customer
-                $maximumCustomerDue = (int) Mage::getStoreConfig('maximumcustomerdue/settings/maximum_customer_due');
-                if($totalDue > $maximumCustomerDue) {
-                    return false;
-                }
-            }
-        }
-
-        // Otherwise just use the original result to determine if the payment
-        // method is available
-        return $checkResult->isAvailable;
+        // Also run the result through the custom function to check
+        // if the payment method is blocked due to the customer order total
+        return MobWeb_MaximumCustomerDue_Helper_Data::isPaymentMethodBlocked($checkResult, $this);
     }
 
     /**
