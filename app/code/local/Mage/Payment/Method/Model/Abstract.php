@@ -654,9 +654,11 @@ abstract class Mage_Payment_Model_Method_Abstract extends Varien_Object
             }
         }
 
+        //return $checkResult->isAvailable;
+
         // Also run the result through the custom function to check
         // if the payment method is blocked due to the customer order total
-        return MobWeb_MaximumCustomerDue_Helper_Data::isPaymentMethodBlocked($checkResult, $this);
+        return MobWeb_MaximumCustomerDue_Helper_Data::isPaymentMethodBlocked($checkResult, $this->_code);
     }
 
     /**

@@ -10,7 +10,7 @@ class MobWeb_MaximumCustomerDue_Helper_Data extends Mage_Core_Helper_Abstract {
 	 * current payment method should be blocked.
 	 *
 	 */
-	public static function isPaymentMethodBlocked($checkResult, $paymentMethod)
+	public static function isPaymentMethodBlocked($checkResult, $currentPaymentMethodCode)
 	{
 		// Check if the payment method is available and if the customer
 		// is logged in
@@ -18,11 +18,10 @@ class MobWeb_MaximumCustomerDue_Helper_Data extends Mage_Core_Helper_Abstract {
 		    // Check if the currently processing payment method is set to be
 		    // blocked at a certain total customer due
 		    $blockedPaymentMethods = explode(',', Mage::getStoreConfig('maximumcustomerdue/settings/blocked_payment_methods'));
-		    $currentPaymentMethod = $paymentMethod->_code;
 
 		    // Only continue the check if the current payment method is indeed
 		    // blocked
-		    if(in_array($currentPaymentMethod, $blockedPaymentMethods)) {
+		    if(in_array($currentPaymentMethodCode, $blockedPaymentMethods)) {
 		        // Get a reference to the customer
 		        $customer = Mage::getSingleton('customer/session')->getCustomer();
 
@@ -38,6 +37,7 @@ class MobWeb_MaximumCustomerDue_Helper_Data extends Mage_Core_Helper_Abstract {
 		        $orders = $orders->toArray();
 		        $totalDue = 0;
 		        foreach($orders['items'] AS $order) {
+		        	Mage::log(print_r($order, true), NULL, 'mobweb.txt');
 		            $orderDue = $order['base_grand_total']-$order['base_total_paid'];
 		            $totalDue += $orderDue;
 		        }
