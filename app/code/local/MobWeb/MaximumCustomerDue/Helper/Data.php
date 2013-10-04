@@ -26,7 +26,7 @@ class MobWeb_MaximumCustomerDue_Helper_Data extends Mage_Core_Helper_Abstract {
 		    // Only continue the check if the current payment method is indeed
 		    // blocked
 		    if(in_array($currentPaymentMethodCode, $blockedPaymentMethods)) {
-		    	Mage::log('Payment method is in list of blocked payment methods.', NULL, $logFile);
+		    	Mage::log(sprintf('Payment method is in list of blocked payment methods (%s).', implode(',', $blockedPaymentMethods)), NULL, $logFile);
 
 		        // Get a reference to the customer
 		        $customer = Mage::getSingleton('customer/session')->getCustomer();
