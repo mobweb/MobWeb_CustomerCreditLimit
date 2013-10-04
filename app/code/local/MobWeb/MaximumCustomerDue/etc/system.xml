@@ -20,7 +20,7 @@
             <p>
               Thank you for using «Customer Credit Limit». To configure this extension, follow the list below or watch our setup guide video:
             </p>
-            <iframe width="560" height="315" src="//www.youtube.com/embed/cvwTdJKK8Sw?rel=0" frameborder="0" allowfullscreen></iframe>
+            <iframe width="560" height="315" src="//www.youtube.com/embed/L_L5kbFxi-E?rel=0" frameborder="0" allowfullscreen></iframe>
             <ul style="list-style:decimal;margin:20px 20px">
               <li>
                 In the first field, set a credit limit per customer. This is the maximum amount of open invoices a customer can have before the selected payment methods will be blocked.
