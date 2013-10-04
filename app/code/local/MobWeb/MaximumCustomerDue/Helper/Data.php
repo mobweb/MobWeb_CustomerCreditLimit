@@ -43,7 +43,6 @@ class MobWeb_MaximumCustomerDue_Helper_Data extends Mage_Core_Helper_Abstract {
 		        $orders = $orders->toArray();
 		        $totalDue = 0;
 		        foreach($orders['items'] AS $order) {
-		        	Mage::log(print_r($order, true), NULL, 'mobweb.txt');
 		            $orderDue = $order['base_grand_total']-$order['base_total_paid'];
 		            $totalDue += $orderDue;
 		        }
