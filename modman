@@ -1,7 +1,7 @@
-app/code/local/MobWeb/MaximumCustomerDue app/code/local/MobWeb/MaximumCustomerDue/
+app/code/local/MobWeb/CustomerCreditLimit app/code/local/MobWeb/CustomerCreditLimit/
 app/code/local/Mage/Payment/Model/Method/Abstract.php app/code/local/Mage/Payment/Model/Method/Abstract.php
 
-app/etc/modules/MobWeb_MaximumCustomerDue.xml app/etc/modules/MobWeb_MaximumCustomerDue.xml
+app/etc/modules/MobWeb_CustomerCreditLimit.xml app/etc/modules/MobWeb_CustomerCreditLimit.xml
 
 # Clear the cache
 @shell   rm -rf $PROJECT/var/cache/* && echo "Magento Cache cleared"

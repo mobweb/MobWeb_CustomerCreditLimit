@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <MobWeb_CustomerCreditLimit>
+            <version>0.0.1</version>
+        </MobWeb_CustomerCreditLimit>
+    </modules>
+    <global>
+        <helpers>
+            <customercreditlimit>
+                <class>MobWeb_CustomerCreditLimit_Helper</class>
+            </customercreditlimit>
+        </helpers>
+    </global>
+</config>

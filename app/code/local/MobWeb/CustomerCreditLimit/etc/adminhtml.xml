@@ -8,9 +8,9 @@
                         <children>
                             <config>
                                 <children>
-                                    <maximumcustomerdue translate="title" module="maximumcustomerdue">
-                                        <title>maximumcustomerdue</title>
-                                    </maximumcustomerdue>
+                                    <customercreditlimit translate="title" module="customercreditlimit">
+                                        <title>customercreditlimit</title>
+                                    </customercreditlimit>
                                 </children>
                             </config>
                         </children>

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <config>
   <sections>
-    <maximumcustomerdue module="maximumcustomerdue">
+    <customercreditlimit module="customercreditlimit">
       <tab>sales</tab>
       <label>Customer Credit Limit</label>
       <sort_order>9001</sort_order>
@@ -34,7 +34,7 @@
             </p>
           ]]></comment>
         </introduction>
-        <settings module="maximumcustomerdue">
+        <settings module="customercreditlimit">
           <label>Payment Method Blocking Settings</label>
           <expanded>1</expanded>
           <sort_order>1</sort_order>
@@ -71,6 +71,6 @@
           </fields>
         </settings>
       </groups>
-    </maximumcustomerdue>
+    </customercreditlimit>
   </sections>
 </config>

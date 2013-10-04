@@ -1,4 +1,4 @@
-# MobWeb_MaximumCustomerDue extension for Magento
+# MobWeb_CustomerCreditLimit extension for Magento
 
 This extension blocks selected payment methods once a customer's total unpaid order totals exceed a specific amount.
 

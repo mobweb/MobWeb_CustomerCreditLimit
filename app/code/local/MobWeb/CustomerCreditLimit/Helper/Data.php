@@ -1,6 +1,6 @@
 <?php
 
-class MobWeb_MaximumCustomerDue_Helper_Data extends Mage_Core_Helper_Abstract {
+class MobWeb_CustomerCreditLimit_Helper_Data extends Mage_Core_Helper_Abstract {
 
 	/*
 	 *
@@ -12,7 +12,7 @@ class MobWeb_MaximumCustomerDue_Helper_Data extends Mage_Core_Helper_Abstract {
 	 */
 	public static function isPaymentMethodBlocked($checkResult, $currentPaymentMethodCode)
 	{
-		$logFile = 'mobweb.maximumcustomerdue.log';
+		$logFile = 'mobweb.customercreditlimit.log';
 
 		Mage::log(sprintf('Checking if payment method should be blocked: %s', $currentPaymentMethodCode), NULL, $logFile);
 
@@ -21,7 +21,7 @@ class MobWeb_MaximumCustomerDue_Helper_Data extends Mage_Core_Helper_Abstract {
 		if($checkResult->isAvailable && Mage::getSingleton('customer/session')->isLoggedIn()) {
 		    // Check if the currently processing payment method is set to be
 		    // blocked at a certain total customer due
-		    $blockedPaymentMethods = explode(',', Mage::getStoreConfig('maximumcustomerdue/settings/blocked_payment_methods'));
+		    $blockedPaymentMethods = explode(',', Mage::getStoreConfig('customercreditlimit/settings/blocked_payment_methods'));
 
 		    // Only continue the check if the current payment method is indeed
 		    // blocked
@@ -49,7 +49,7 @@ class MobWeb_MaximumCustomerDue_Helper_Data extends Mage_Core_Helper_Abstract {
 
 		        // Check if the total due is greater than what the admin set as
 		        // the maximum total due per customer
-		        $maximumCustomerDue = (int) Mage::getStoreConfig('maximumcustomerdue/settings/maximum_customer_due');
+		        $maximumCustomerDue = (int) Mage::getStoreConfig('customercreditlimit/settings/maximum_customer_due');
 		        if($totalDue > $maximumCustomerDue) {
 		        	Mage::log(sprintf('Current customer credit (%s) bigger than configured credit limit (%s), blocking payment method.', $totalDue, $maximumCustomerDue), NULL, $logFile);
 		            return false;
