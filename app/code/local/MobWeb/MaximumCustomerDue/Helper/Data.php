@@ -12,6 +12,10 @@ class MobWeb_MaximumCustomerDue_Helper_Data extends Mage_Core_Helper_Abstract {
 	 */
 	public static function isPaymentMethodBlocked($checkResult, $currentPaymentMethodCode)
 	{
+		$logFile = 'mobweb.cancelunpaidorders.log';
+
+		Mage::log(sprintf('Checking if payment method should be blocked: %s', $currentPaymentMethodCode), NULL, $logfile);
+
 		// Check if the payment method is available and if the customer
 		// is logged in
 		if($checkResult->isAvailable && Mage::getSingleton('customer/session')->isLoggedIn()) {
@@ -22,6 +26,8 @@ class MobWeb_MaximumCustomerDue_Helper_Data extends Mage_Core_Helper_Abstract {
 		    // Only continue the check if the current payment method is indeed
 		    // blocked
 		    if(in_array($currentPaymentMethodCode, $blockedPaymentMethods)) {
+		    	Mage::log('Payment method is in list of blocked payment methods.', NULL, $logfile);
+
 		        // Get a reference to the customer
 		        $customer = Mage::getSingleton('customer/session')->getCustomer();
 
@@ -46,9 +52,16 @@ class MobWeb_MaximumCustomerDue_Helper_Data extends Mage_Core_Helper_Abstract {
 		        // the maximum total due per customer
 		        $maximumCustomerDue = (int) Mage::getStoreConfig('maximumcustomerdue/settings/maximum_customer_due');
 		        if($totalDue > $maximumCustomerDue) {
+		        	Mage::log(sprintf('Current customer credit (%s) bigger than configured credit limit (%s), blocking payment method.', $totalDue, $maximumCustomerDue), NULL, $logfile);
 		            return false;
+		        } else {
+		        	Mage::log(sprintf('Current customer credit (%s) is smaller than configured credit limit (%s), not blocking payment method.', $totalDue, $maximumCustomerDue), NULL, $logfile);
 		        }
+		    } else {
+		    	Mage::log('Not blocking payment method. Not in configured list of blocked payment methods.', NULL, $logfile);
 		    }
+		} else {
+			Mage::log('Unable to check if payment method should be blocked. Either its not available anyway or the customer isnt logged in', NULL, $logfile);
 		}
 
 		// Otherwise just use the original result to determine if the payment
