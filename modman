@@ -1,5 +1,5 @@
 app/code/local/MobWeb/MaximumCustomerDue app/code/local/MobWeb/MaximumCustomerDue/
-app/code/local/Mage/Payment/Method/Model/Abstract.php app/code/local/Mage/Payment/Method/Model/Abstract.php
+app/code/local/Mage/Payment/Model/Method/Abstract.php app/code/local/Mage/Payment/Model/Method/Abstract.php
 
 app/etc/modules/MobWeb_MaximumCustomerDue.xml app/etc/modules/MobWeb_MaximumCustomerDue.xml
 
