@@ -12,7 +12,7 @@ class MobWeb_MaximumCustomerDue_Helper_Data extends Mage_Core_Helper_Abstract {
 	 */
 	public static function isPaymentMethodBlocked($checkResult, $currentPaymentMethodCode)
 	{
-		$logFile = 'mobweb.cancelunpaidorders.log';
+		$logFile = 'mobweb.maximumcustomerdue.log';
 
 		Mage::log(sprintf('Checking if payment method should be blocked: %s', $currentPaymentMethodCode), NULL, $logFile);
 
