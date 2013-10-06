@@ -31,10 +31,11 @@ class MobWeb_CustomerCreditLimit_Helper_Data extends Mage_Core_Helper_Abstract {
 		        // Get a reference to the customer
 		        $customer = Mage::getSingleton('customer/session')->getCustomer();
 
-		        // Get all of the customer's orders
+		        // Get all of the customer's non-canceled or completed orders
 		        $orders =   Mage::getModel('sales/order')
 		                    ->getCollection()
 		                    ->addFieldToFilter('customer_id', $customer->getId())
+		                    ->addFieldToFilter('status', array('nin' => array('canceled', 'complete')))
 		                    ->addAttributeToSelect('base_grand_total')
 		                    ->addAttributeToSelect('base_total_paid');
 
