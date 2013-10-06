@@ -10,7 +10,7 @@ class MobWeb_CustomerCreditLimit_Helper_Data extends Mage_Core_Helper_Abstract {
 	 * current payment method should be blocked.
 	 *
 	 */
-	public static function isPaymentMethodBlocked($checkResult, $currentPaymentMethodCode)
+	public static function isPaymentMethodBlocked($checkResult, $currentPaymentMethodCode, $quote)
 	{
 		$logFile = 'mobweb.customercreditlimit.log';
 
@@ -46,6 +46,14 @@ class MobWeb_CustomerCreditLimit_Helper_Data extends Mage_Core_Helper_Abstract {
 		            $orderDue = $order['base_grand_total']-$order['base_total_paid'];
 		            $totalDue += $orderDue;
 		        }
+
+		        // Add the total amount of the current order to the total due.
+		        // Example: If the customer has open invoices for 500$ total
+		        // and the admin set a customer credit limit of 750$, if the 
+		        // current order exceeds 250$ we have to block the blocked
+		        // payment methods for this order already
+		        $orderTotal = $quote ? $quote->getGrandTotal() : 0;
+		        $totalDue += $orderTotal;
 
 		        // Check if the total due is greater than what the admin set as
 		        // the maximum total due per customer
