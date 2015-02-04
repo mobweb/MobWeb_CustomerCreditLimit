@@ -12,7 +12,7 @@ class MobWeb_CustomerCreditLimit_Helper_Data extends Mage_Core_Helper_Abstract {
 	*/
 	public static function isPaymentMethodBlocked($checkResult, $currentPaymentMethodCode, $quote)
 	{
-		$logFile = 'mobweb.customercreditlimit.log';
+		$logFile = 'mobweb_customercreditlimit.log';
 
 		Mage::log(sprintf('Checking if payment method should be blocked: %s', $currentPaymentMethodCode), NULL, $logFile);
 
