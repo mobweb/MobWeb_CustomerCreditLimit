@@ -14,10 +14,28 @@
                 </setup>
             </customercreditlimit_setup>
         </resources>
+        <models>
+            <customercreditlimit>
+                <class>MobWeb_CustomerCreditLimit_Model</class>
+            </customercreditlimit>
+        </models>
         <helpers>
             <customercreditlimit>
                 <class>MobWeb_CustomerCreditLimit_Helper</class>
             </customercreditlimit>
         </helpers>
     </global>
+    <frontend>
+        <events>
+            <payment_method_is_active>
+                <observers>
+                    <loginredirect>
+                        <type>singleton</type>
+                        <class>customercreditlimit/observer</class>
+                        <method>paymentMethodIsActive</method>
+                    </loginredirect>
+                </observers>
+            </payment_method_is_active>
+        </events>
+    </frontend>
 </config>
