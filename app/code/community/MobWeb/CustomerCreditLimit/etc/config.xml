@@ -6,6 +6,14 @@
         </MobWeb_CustomerCreditLimit>
     </modules>
     <global>
+        <resources>
+            <customercreditlimit_setup>
+                <setup>
+                    <module>MobWeb_CustomerCreditLimit</module>
+                    <class>Mage_Customer_Model_Entity_Setup</class>
+                </setup>
+            </customercreditlimit_setup>
+        </resources>
         <helpers>
             <customercreditlimit>
                 <class>MobWeb_CustomerCreditLimit_Helper</class>
