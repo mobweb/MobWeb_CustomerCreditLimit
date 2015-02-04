@@ -6,7 +6,7 @@ class MobWeb_CustomerCreditLimit_Helper_Data extends Mage_Core_Helper_Abstract {
 	*
 	* This function checks if the payment method is available. If it is, it
 	* checks if the total customer order amount due is higher than the maximum
-	* set by the admin in the configuration. If it is, it checks if the
+	* set by the admin in the configuration or on the customer directly. If it is, it checks if the
 	* current payment method should be blocked.
 	*
 	*/
@@ -56,9 +56,19 @@ class MobWeb_CustomerCreditLimit_Helper_Data extends Mage_Core_Helper_Abstract {
 				$orderTotal = $quote ? $quote->getGrandTotal() : 0;
 				$totalDue += $orderTotal;
 
+				// Get the credit limit for this specific customer
+				$maximumCustomerDue = (int) $customer->getData('credit_limit');
+				if($maximumCustomerDue && $maximumCustomerDue > 0) {
+					Mage::log(sprintf('Customer credit limit retrieved from customer object: %s', $maximumCustomerDue), NULL, $logFile);
+				} else {
+					
+					// If no credit limit has been set for this specific customer, get the default customer credit limit
+					$maximumCustomerDue = (int) Mage::getStoreConfig('customercreditlimit/settings/maximum_customer_due');
+					Mage::log(sprintf('Customer credit limit retrieved from default setting: %s', $maximumCustomerDue), NULL, $logFile);
+				}
+
 				// Check if the total due is greater than what the admin set as
 				// the maximum total due per customer
-				$maximumCustomerDue = (int) Mage::getStoreConfig('customercreditlimit/settings/maximum_customer_due');
 				if($totalDue > $maximumCustomerDue) {
 					Mage::log(sprintf('Current customer credit (%s) bigger than configured credit limit (%s), blocking payment method.', $totalDue, $maximumCustomerDue), NULL, $logFile);
 					return false;
