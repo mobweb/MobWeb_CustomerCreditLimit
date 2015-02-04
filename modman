@@ -1,5 +1,4 @@
 app/code/community/MobWeb/CustomerCreditLimit app/code/community/MobWeb/CustomerCreditLimit/
-app/code/local/Mage/Payment/Model/Method/Abstract.php app/code/local/Mage/Payment/Model/Method/Abstract.php
 
 app/etc/modules/MobWeb_CustomerCreditLimit.xml app/etc/modules/MobWeb_CustomerCreditLimit.xml
 
