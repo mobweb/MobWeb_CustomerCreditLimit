@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 <layout version="0.1.0">
+
+	<!-- Magento < 1.9 -->
 	<checkout_onepage_index translate="label">
 		<reference name="checkout.payment.methods">
 			<block type="core/text_list" name="checkout.payment.methods.additional" as="additional" translate="label">
@@ -7,4 +9,13 @@
 			</block>
 		</reference>
 	</checkout_onepage_index>
+
+	<!-- Magento => 1.9 -->
+	<checkout_onepage_paymentmethod translate="label">
+		<reference name="root">
+			<block type="core/text_list" name="checkout.payment.methods.additional" as="additional" translate="label">
+				<block type="customercreditlimit/info" name="checkout.payment.methods.additional.customercreditlimit.info" />
+			</block>
+		</reference>
+	</checkout_onepage_paymentmethod>
 </layout>
