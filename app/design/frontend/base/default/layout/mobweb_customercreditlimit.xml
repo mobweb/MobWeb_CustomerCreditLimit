@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<checkout_onepage_index translate="label">
+		<reference name="checkout.payment.methods">
+			<block type="core/text_list" name="checkout.payment.methods.additional" as="additional" translate="label">
+				<block type="customercreditlimit/info" name="checkout.payment.methods.additional.customercreditlimit.info" />
+			</block>
+		</reference>
+	</checkout_onepage_index>
+</layout>

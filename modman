@@ -1,5 +1,7 @@
 app/code/community/MobWeb/CustomerCreditLimit app/code/community/MobWeb/CustomerCreditLimit/
 
+app/design/frontend/base/default/layout/mobweb_customercreditlimit.xml app/design/frontend/base/default/layout/mobweb_customercreditlimit.xml
+
 app/etc/modules/MobWeb_CustomerCreditLimit.xml app/etc/modules/MobWeb_CustomerCreditLimit.xml
 
 # Clear the cache

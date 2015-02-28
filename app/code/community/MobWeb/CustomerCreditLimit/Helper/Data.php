@@ -2,6 +2,8 @@
 
 class MobWeb_CustomerCreditLimit_Helper_Data extends Mage_Core_Helper_Abstract {
 
+	static $currentlyBlockedPaymentMethodsSessionIdentifier = 'currently_blocked_payment_methods';
+
 	/*
 	*
 	* This function checks if the payment method is available. If it is, it
@@ -71,6 +73,19 @@ class MobWeb_CustomerCreditLimit_Helper_Data extends Mage_Core_Helper_Abstract {
 				// the maximum total due per customer
 				if($totalDue > $maximumCustomerDue) {
 					Mage::log(sprintf('Current customer credit (%s) bigger than configured credit limit (%s), blocking payment method.', $totalDue, $maximumCustomerDue), NULL, $logFile);
+
+					// Keep track of the blocked payment methods in the session
+					$currentlyBlockedPaymentMethods = Mage::getSingleton('adminhtml/session')->getData(self::$currentlyBlockedPaymentMethodsSessionIdentifier);
+
+					if(!$currentlyBlockedPaymentMethods || !count($currentlyBlockedPaymentMethods)) {
+						$currentlyBlockedPaymentMethods = array();
+					}
+
+					$currentlyBlockedPaymentMethods[$currentPaymentMethodCode] = $currentPaymentMethodCode;
+
+					Mage::getSingleton('adminhtml/session')->setData(self::$currentlyBlockedPaymentMethodsSessionIdentifier, $currentlyBlockedPaymentMethods);
+
+					// Return false so that the payment method will not be displayed
 					return false;
 				} else {
 					Mage::log(sprintf('Current customer credit (%s) is smaller than configured credit limit (%s), not blocking payment method.', $totalDue, $maximumCustomerDue), NULL, $logFile);

@@ -24,6 +24,11 @@
                 <class>MobWeb_CustomerCreditLimit_Helper</class>
             </customercreditlimit>
         </helpers>
+        <blocks>
+            <customercreditlimit>
+                <class>MobWeb_CustomerCreditLimit_Block</class>
+            </customercreditlimit>
+        </blocks>
     </global>
     <frontend>
         <events>
@@ -37,5 +42,12 @@
                 </observers>
             </payment_method_is_active>
         </events>
+        <layout>
+            <updates>
+                <MobWeb_CustomerCreditLimit>
+                    <file>mobweb_customercreditlimit.xml</file>
+                </MobWeb_CustomerCreditLimit>
+            </updates>
+        </layout>
     </frontend>
 </config>
